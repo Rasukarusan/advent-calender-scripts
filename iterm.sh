@@ -114,10 +114,9 @@ function multi_ssh_split() {
     local row=$(expr $servers_count / $max_panel_count)
     local session_ids=(`get_current_session_id`)
 
-    # [ $row -eq 1 ] && row=0
+    [ `expr $servers_count % $max_panel_count` -eq 0 ] && row=$(expr $row - 1)
 
     # split horizontally and store a session id
-    # for i in `seq 1 ${row}`; do
     while [ $row -gt 0 ];do
         split_horizontally
         row=$(expr $row - 1)
@@ -128,9 +127,13 @@ function multi_ssh_split() {
     select_session_by_id ${session_ids[$row]}
     send_command "set_badge ${target_servers[0]}"
     send_command "ssh ${target_servers[0]}"
+    [ $servers_count -eq 1 ] && return
+
+    # -1 is that because ssh first-server via first pane
+    local vertical_cell_count=$(expr ${servers_count} - 1)
 
     # split vertically
-    for i in `seq 1 $(expr ${servers_count} - 1)`; do
+    for i in `seq 1 $vertical_cell_count`; do
         if [ `get_current_columns` -lt $min_width ];then
             row=$(expr $row + 1)
             select_session_by_id ${session_ids[$row]}
