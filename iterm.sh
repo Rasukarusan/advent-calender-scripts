@@ -133,7 +133,7 @@ function multi_ssh_split() {
     local vertical_cell_count=$(expr ${servers_count} - 1)
 
     # split vertically
-    for i in `seq 1 $vertical_cell_count`; do
+    for i in `seq $vertical_cell_count`; do
         if [ `get_current_columns` -lt $min_width ];then
             row=$(expr $row + 1)
             select_session_by_id ${session_ids[$row]}
