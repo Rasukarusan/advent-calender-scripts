@@ -15,16 +15,16 @@ tell application "Sequel Pro"
             set frontmost to true
             delay 0.5
             repeat with i from 1 to (count argv)
-                click menu item "新規接続タブ" of menu "ファイル" of menu bar item "ファイル" of menu bar 1 of application process "Sequel Pro" of application "System Events"
+                keystroke "t" using {command down}
                 tell window "Sequel Pro"
                     delay 0.5
-                    tell outline 1 of scroll area 1 of splitter group 1 of group 2 of window "Sequel Pro" of application process "Sequel Pro" of application "System Events"
-                        # row 1は「クイック接続」、row 2は「お気に入り」の行なので実質一番上はrow 3となる
+                    tell outline 1 of scroll area 1 of splitter group 1 of group 2
+                        # because row1 is "QUICK CONNECT" and row2 is "FAVORITES", the top of favorites is row3.
                         set _row_index to (item i of argv as number) + 2
                         select row _row_index
                     end tell
-                    tell scroll area 2 of splitter group 1 of group 2 of window "Sequel Pro" of application process "Sequel Pro" of application "System Events"
-                        click button "接続"
+                    tell scroll area 2 of splitter group 1 of group 2
+                        click button 2
                     end tell
                 end tell
             end repeat
