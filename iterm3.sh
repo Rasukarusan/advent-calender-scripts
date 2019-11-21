@@ -12,9 +12,11 @@ on run argv
 end run
 EOF
 }
+
 function main() {
-    echo $0
-    seq -f "%.1f" 0.0 0.1 1 | fzf --header 'transparency' --bind "ctrl-p:execute-silent($0 {})"
+    local transparency=$(seq -f "%.1f" 0.0 0.1 1 | fzf --header 'transparency' --bind "ctrl-p:execute-silent($0 {})")
+    [ -z "transparency" ] && return
+    change_transparency $transparency
 }
 
 if [ $# -eq 0 ];then
