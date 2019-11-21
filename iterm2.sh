@@ -30,6 +30,21 @@ end run
 EOF
 }
 
+# my colors
+function print_colors_rgb() {
+    local colors=(
+        # "color_name R G B"
+        "Black     0    0   0",
+        "Red     201   27   0",
+        "Green     0  194   0",
+        "Yellow  199  196   0",
+        "Blue      2   37 199",
+        "Magenda 201   48 199",
+        "White     0  197 199",
+    )
+    echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g'
+}
+
 function main() {
     local current_color
     IFS=',' read -a current_color < <(get_current_background_color)
@@ -39,26 +54,15 @@ function main() {
         $(echo "scale=2;(${current_color[2]}/65535)*255" | bc)
     )
 
-    local colors=(
-        # "color_name R G B"
-        "black     0    0   0",
-        "red     201   27   0",
-        "green     0  194   0",
-        "yellow  199  196   0",
-        "blue      2   37 199",
-        "magenda 201   48 199",
-        "white     0  197 199",
-    )
     local color
     read -r -a color < <(
-        echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g' \
-           | fzf --delimiter=" " --with-nth 1 --bind 'ctrl-p:execute-silent(./iterm2.sh {2} {3} {4})'
+        print_colors_rgb | fzf --delimiter=" " --with-nth 1 --bind "ctrl-p:execute-silent($0 {2} {3} {4})"
     )
 
     if [ -z "$color" ];then
-        ./iterm2.sh ${current_color_rgb[@]}
+        $0 ${current_color_rgb[@]}
     else
-        ./iterm2.sh ${color[@]:1:3}
+        $0 ${color[@]:1:3}
     fi
 }
 
