@@ -19,8 +19,7 @@ osascript -- - $r $g $b << EOF
 on run argv
     tell application "iTerm"
         activate
-        set _current_session to current session of current window
-        tell _current_session
+        tell current session of current window
             set red to (item 1 of argv)
             set green to (item 2 of argv)
             set blue to (item 3 of argv)
