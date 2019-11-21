@@ -41,7 +41,7 @@ function main() {
     )
 
     local colors=(
-    # "color_name R G B"
+        # "color_name R G B"
         "black     0    0   0",
         "red     201   27   0",
         "green     0  194   0",
@@ -52,13 +52,10 @@ function main() {
     )
     local color
     read -r -a color < <(
-        $(echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g' \
+        echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g' \
            | fzf --delimiter=" " --with-nth 1 --bind 'ctrl-p:execute-silent(./iterm2.sh {2} {3} {4})'
-        )
     )
 
-    echo $color
-    exit
     if [ -z "$color" ];then
         ./iterm2.sh ${current_color_rgb[@]}
     else
@@ -69,6 +66,5 @@ function main() {
 if [ $# -eq 0 ];then
     main
 else
-    echo $@ > hoge
     change_background_color $@
 fi
