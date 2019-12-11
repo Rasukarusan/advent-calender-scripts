@@ -40,9 +40,10 @@ function print_colors_rgb() {
         "Yellow  199  196   0",
         "Blue      2   37 199",
         "Magenda 201   48 199",
-        "White     0  197 199",
+        "Cyan     0  197 199",
+        "Whilte   255  255 255",
     )
-    echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g'
+    echo ${colors[@]} | tr ',' '\n' | sed 's/^ //g' | sed "/^$/d"
 }
 
 function main() {
