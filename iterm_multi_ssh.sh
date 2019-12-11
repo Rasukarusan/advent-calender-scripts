@@ -66,10 +66,6 @@ end tell
 EOF
 }
 
-function set_badge() {
-    printf "\e]1337;SetBadgeFormat=%s\a" $(/bin/echo -n "$1" | base64)
-}
-
 function select_session_by_id() {
 osascript -- - "$1" << EOF
 on run argv
@@ -125,14 +121,14 @@ function multi_ssh_split() {
 
     # select first pane
     select_session_by_id ${session_ids[$row]}
-    send_command "set_badge ${target_servers[0]}"
+    send_command "printf '\e]1337;SetBadgeFormat=%s\a' $(/bin/echo -n ${target_servers[0]} | base64)"
     send_command "ssh ${target_servers[0]}"
     [ $servers_count -eq 1 ] && return
 
     # -1 is that because ssh first-server via first pane
     local vertical_cell_count=$(expr ${servers_count} - 1)
 
-    # split vertically
+    # split vertically and ssh
     for i in `seq $vertical_cell_count`; do
         if [ `get_current_columns` -lt $min_width ];then
             row=$(expr $row + 1)
@@ -140,7 +136,7 @@ function multi_ssh_split() {
         else
             split_vertically
         fi
-        send_command "set_badge ${target_servers[$i]}"
+        send_command "printf '\e]1337;SetBadgeFormat=%s\a' $(/bin/echo -n ${target_servers[$i]} | base64)"
         send_command "ssh ${target_servers[$i]}"
     done
     broadcast_input
