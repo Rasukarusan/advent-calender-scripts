@@ -15,7 +15,7 @@ EOF
 
 function main() {
     local transparency=$(seq -f "%.1f" 0.0 0.1 1 | fzf --header 'transparency' --bind "ctrl-p:execute-silent($0 {})")
-    [ -z "transparency" ] && return
+    [ -z "$transparency" ] && return
     change_transparency $transparency
 }
 
