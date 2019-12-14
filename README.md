@@ -1,8 +1,10 @@
 Advent Calender Scripts
 ====
+Qiitaアドベントカレンダー2019, [今年イチ！お勧めしたいテクニック by ゆめみ feat.やめ太郎 Advent Calendar 2019](https://qiita.com/advent-calendar/2019/yumemi_no1)の記事投稿用リポジトリ
 
-Qiitaアドベントカレンダー2019、株式会社ゆめみの記事投稿用リポジトリ  
-[記事]()と合わせてご覧ください
+## 記事
+
+[業務で使うツール(iTerm2,SequelPro,Chrome)をShellScriptでハイパーテクニックする]()
 
 ## Requirement
 
