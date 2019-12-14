@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 #
 # SequelProで指定した接続を開く
 # 引数にはSequelProの「お気に入り」の行番号を示すインデックスが入る
 #
-function run_sequel_pro() {
+function connect() {
 osascript -- - "$@" << EOF
 on run argv
 tell application "Sequel Pro"
@@ -45,7 +45,7 @@ function main() {
         rows=(${rows[@]} $row)
     done
     [ ${#rows[@]} -eq 0 ] && return 130
-    run_sequel_pro ${rows[@]} >/dev/null
+    connect ${rows[@]} >/dev/null
 }
 
 main
