@@ -36,7 +36,8 @@ EOF
 }
 
 function main() {
-    local favorites=$(plutil -convert json ~/Library/Application\ Support/Sequel\ Pro/Data/Favorites.plist -o - | jq -r '."Favorites Root".Children[].name')
+    local favorites=$(plutil -convert json ~/Library/Application\ Support/Sequel\ Pro/Data/Favorites.plist -o - \
+        | jq -r '."Favorites Root".Children[].name')
     local targets=($(echo "${favorites}" | fzf))
     local rows=()
     for target in ${targets[@]}; do
