@@ -4,7 +4,7 @@ Qiitaアドベントカレンダー2019, [今年イチ！お勧めしたいテ�
 
 ## 記事
 
-[業務で使うツール(iTerm2,SequelPro,Chrome)をShellScriptでハイパーテクニックする]()
+[業務で使うツール(iTerm2,SequelPro,Chrome)をShellScriptでハイパーテクニックする](https://www.rasukarusan.com/entry/2019/12/20/000000)
 
 ## Requirement
 
