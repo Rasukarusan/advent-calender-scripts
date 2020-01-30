@@ -57,7 +57,7 @@ function main() {
 
     local color
     read -r -a color < <(
-        print_colors_rgb | fzf --delimiter=" " --with-nth 1 --bind "ctrl-p:execute-silent($0 {2} {3} {4})"
+    print_colors_rgb | fzf --delimiter=" " --with-nth 1 --bind "ctrl-j:down+execute-silent($0 {2} {3} {4}),ctrl-k:up+execute-silent($0 {2} {3} {4})"
     )
 
     if [ -z "$color" ];then
